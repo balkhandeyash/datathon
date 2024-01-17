@@ -1,0 +1,90 @@
+/* Header.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333; /* Update with your desired background color */
+    color: white;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 40px; /* Adjust the image size as needed */
+    margin-right: 10px;
+  }
+  
+  .navigation ul {
+    list-style-type: none;
+    display: flex;
+  }
+  
+  .navigation li {
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .user-options {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Add this style to make the color of dropbtn white */
+.dropbtn {
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .login-signup a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+  
+  .login-signup a:hover {
+    background-color: white;
+    color: #333;
+  }
+  

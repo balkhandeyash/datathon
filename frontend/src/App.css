@@ -1,0 +1,41 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+
+  text-align: center;
+  background-color:blanchedalmond;
+  width: 100vw; /* 100% of the viewport width */
+  height: 100vh; /* 100% of the viewport height */
+  margin: 0; /* Remove default margin */
+  overflow: hidden; /* Optional: Prevents scrollbars */
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.Body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Adjust the background color as needed */
+}
+
+.Footer {
+  bottom: 0%;
+  background-color: #333; /* Adjust the background color as needed */
+  color: white;
+  padding: 0px;
+}
