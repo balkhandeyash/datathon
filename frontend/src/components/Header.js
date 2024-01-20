@@ -21,7 +21,7 @@ function Header() {
         </div>
         <div className="user-options">
           <div className="login-signup">
-            <Link to="#">Login</Link>
+            <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
           </div>
           <div className="dropdown">

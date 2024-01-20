@@ -105,7 +105,7 @@ function LandingPage() {
               <p>Shreyash N. Waghmare</p>
             </div>
             <div className="developer">
-              <img src="developer4.jpg" alt="Developer 4" />
+              <img src="vedant.png" alt="Developer 4" />
               <p>Vedant P. Nehare</p>
             </div>
           </div>
