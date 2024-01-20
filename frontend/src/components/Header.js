@@ -1,10 +1,19 @@
 // Header.js
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
+  const location = useLocation();
+
+  const isLoginRegisterPage =
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/";
+
+  const shouldRenderDropdown = !isLoginRegisterPage; // Render dropdown only if not on login/register/landing page
+
   return (
     <>
       <div className="header">
@@ -12,18 +21,30 @@ function Header() {
           <img src="logo192.png" alt="Logo" />
           <span>SecureNet</span>
         </div>
-        <div className="navigation">
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-          </ul>
-        </div>
-        <div className="user-options">
-          <div className="login-signup">
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+        {isLoginRegisterPage ? (
+          <div className="navigation">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/">About</Link>
+              </li>
+              <li>
+                <Link to="/">Contact</Link>
+              </li>
+            </ul>
           </div>
+        ) : null}
+        {isLoginRegisterPage ? (
+          <div className="user-options">
+            <div className="login-signup">
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </div>
+          </div>
+        ) : null}
+        {shouldRenderDropdown ? (
           <div className="dropdown">
             <button className="dropbtn">&#9660;</button>
             <div className="dropdown-content">
@@ -32,7 +53,7 @@ function Header() {
               <Link to="#">Option 3</Link>
             </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </>
   );
