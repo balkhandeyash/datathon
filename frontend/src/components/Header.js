@@ -1,7 +1,7 @@
 // Header.js
 
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
@@ -13,6 +13,13 @@ function Header() {
     location.pathname === "/";
 
   const shouldRenderDropdown = !isLoginRegisterPage; // Render dropdown only if not on login/register/landing page
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Perform logout actions if needed
+    // Redirect to the landing page
+    navigate("/");
+  };
 
   return (
     <>
@@ -48,9 +55,11 @@ function Header() {
           <div className="dropdown">
             <button className="dropbtn">&#9660;</button>
             <div className="dropdown-content">
-              <Link to="#">Option 1</Link>
-              <Link to="#">Option 2</Link>
-              <Link to="#">Option 3</Link>
+              <Link to="/profile">Profile</Link>
+              <Link to="/dashboard">Job Openings</Link>
+              <Link to="#">Notifications</Link>
+              <Link to="#">Post a Job</Link>
+              <Link to="/">Logout</Link>
             </div>
           </div>
         ) : null}

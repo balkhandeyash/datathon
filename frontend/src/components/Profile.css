@@ -1,0 +1,95 @@
+/* Profile.css */
+
+.profile-body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-card {
+    width: 450px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.user-details {
+    text-align: left;
+}
+
+.user-details h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.user-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Add more styles as needed for other user details */
+
+/* Increase margin and padding between buttons */
+.user-details button {
+    margin: 10px;
+    padding: 12px;
+}
+
+/* Zoomed-in Card */
+.zoomed-card {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for the overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style the form inside the zoomed-in card */
+.zoomed-card form {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.zoomed-card form input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.zoomed-card form button {
+    width: 100%;
+    padding: 12px; /* Adjusted padding */
+    background-color: #4caf50; /* Green color for update button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.zoomed-card form button.close {
+    background-color: #f44336; /* Red color for close button */
+}

@@ -13,6 +13,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -55,6 +56,22 @@ function App() {
                     element={
                       <>
                         <Dashboard />
+                      </>
+                    }
+                  />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                token ? (
+                  <ProtectedRoute
+                    element={
+                      <>
+                        <Profile />
                       </>
                     }
                   />

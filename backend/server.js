@@ -217,11 +217,6 @@ app.post("/login", async (req, res) => {
 
 app.post("/LandingPage", async (req, res) => {});
 
-app.get("/dashboard", verifyToken, (req, res) => {
-  // Only authenticated users can access this route
-  res.send("Welcome to the dashboard!");
-});
-
 function verifyToken(req, res, next) {
   const token = req.header("Authorization");
 
@@ -237,6 +232,31 @@ function verifyToken(req, res, next) {
     next();
   });
 }
+
+app.get("/api/user", verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    // Fetch user details from the database based on the userId
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Return user details in the response
+    res.status(200).json({
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      // Add other user details as needed
+    });
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(500).json({ error: "Error fetching user details" });
+  }
+});
+
 
 app.post("/api/send-email", async (req, res) => {
   const { name, email, message } = req.body;
@@ -265,6 +285,38 @@ app.post("/api/send-email", async (req, res) => {
   } catch (error) {
     console.error("Error sending email:", error);
     res.status(500).send("Error sending email");
+  }
+});
+
+app.put("/api/user", verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    // Fetch the user from the database based on the userId
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Update the user details with the data from the request body
+    user.username = req.body.username || user.username;
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    // Save the updated user details in the database
+    await user.save();
+
+    res.status(200).json({
+      message: "User profile updated successfully",
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      // Add other user details as needed
+    });
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    res.status(500).json({ error: "Error updating user profile" });
   }
 });
 

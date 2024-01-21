@@ -99,6 +99,7 @@ const Login = ({ setToken }) => {
 
       if (response.status === 200) {
         console.log("login Success");
+        //console.log(response.data.token)
         localStorage.setItem("token", response.data.token);
         setToken(response.data.token);
         //console.log(response.data.token);
