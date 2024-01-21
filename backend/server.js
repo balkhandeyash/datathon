@@ -25,6 +25,7 @@ db.once("open", function () {
 });
 
 const User = mongoose.model("User", {
+  name: String,
   username: String,
   password: String,
   email: String,
@@ -141,7 +142,7 @@ app.get("/login", async (req, res) => {
 
 app.post("/register", async (req, res) => {
   try {
-    const { username, password, captchaResponse, email, otp } = req.body;
+    const { name, username, password, captchaResponse, email, otp } = req.body;
     const existingUser = await User.findOne({ username });
 
     // Verify OTP length
@@ -171,7 +172,12 @@ app.post("/register", async (req, res) => {
 
     // If username is unique, create a new user and save it in the database
     const hashedPassword = await bcrypt.hashSync(password, 10);
-    const newUser = new User({ username, password: hashedPassword, email });
+    const newUser = new User({
+      name,
+      username,
+      password: hashedPassword,
+      email,
+    });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully" });
@@ -256,7 +262,6 @@ app.get("/api/user", verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error fetching user details" });
   }
 });
-
 
 app.post("/api/send-email", async (req, res) => {
   const { name, email, message } = req.body;

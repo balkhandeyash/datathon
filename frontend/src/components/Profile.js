@@ -37,37 +37,32 @@ const Profile = () => {
     }));
   };
 
-  // ...
 
-const updateProfile = async () => {
-  try {
-    console.log("Updating profile details:", editedValuesTemp);
+  const updateProfile = async () => {
+    try {
+      console.log("Updating profile details:", editedValuesTemp);
 
-    // Make a PUT request to update user details
-    const response = await axios.put(
-      "http://127.0.0.1:5001/api/user",
-      editedValuesTemp,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+      // Make a PUT request to update user details
+      const response = await axios.put(
+        "http://127.0.0.1:5001/api/user",
+        editedValuesTemp,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
-    console.log("Profile updated successfully:", response.data);
+      console.log("Profile updated successfully:", response.data);
 
-    // Update the local state with the new data
-    setEditedValues(editedValuesTemp);
-    setUserData(editedValuesTemp);
-    setIsProfileZoomed(false);
-  } catch (error) {
-    console.error("Error updating user profile:", error);
-  }
-};
-
-// ...
-
-
+      // Update the local state with the new data
+      setEditedValues(editedValuesTemp);
+      setUserData(editedValuesTemp);
+      setIsProfileZoomed(false);
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+    }
+  };
   const updatePassword = (currentPassword, newPassword) => {
     console.log("Updating password:", currentPassword, newPassword);
     setIsPasswordUpdateZoomed(false);

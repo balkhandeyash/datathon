@@ -11,6 +11,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [otp, setOtp] = useState("");
   const [captchaValue, setCaptchaValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +63,7 @@ const Register = () => {
 
       // Perform registration logic with email, username, password, captcha, and OTP
       const response = await axios.post("http://127.0.0.1:5001/register", {
+        name,
         username,
         password,
         email,
@@ -120,6 +122,17 @@ const Register = () => {
             </Box>
           )}
           <form onSubmit={handleRegister}>
+            <div className="form-group">
+              <label htmlFor="name">Your Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="username">Username:</label>
               <input
