@@ -29,7 +29,7 @@ const Register = () => {
 
       // Send OTP to the provided email
       const response = await axios.post(
-        "http://127.0.0.1:5001/send-otp",
+        "https://securenet-backend.onrender.com/send-otp",
         { email },
         {
           headers: {
@@ -62,14 +62,17 @@ const Register = () => {
       }
 
       // Perform registration logic with email, username, password, captcha, and OTP
-      const response = await axios.post("http://127.0.0.1:5001/register", {
-        name,
-        username,
-        password,
-        email,
-        captchaValue,
-        otp,
-      });
+      const response = await axios.post(
+        "https://securenet-backend.onrender.com/register",
+        {
+          name,
+          username,
+          password,
+          email,
+          captchaValue,
+          otp,
+        }
+      );
 
       console.log("Server Response:", response);
 

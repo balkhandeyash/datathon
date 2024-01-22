@@ -25,7 +25,7 @@ const Login = ({ setToken }) => {
 
       // Send a request to the server to initiate OTP sending
       const response = await axios.post(
-        "http://127.0.0.1:5001/login-otp",
+        "https://securenet-backend.onrender.com/login-otp",
         { username },
         {
           headers: {
@@ -41,7 +41,7 @@ const Login = ({ setToken }) => {
 
         // Generate and send OTP to the provided email
         const otpResponse = await axios.post(
-          "http://127.0.0.1:5001/send-otp",
+          "https://securenet-backend.onrender.com/send-otp",
           { email },
           {
             headers: {
@@ -77,7 +77,7 @@ const Login = ({ setToken }) => {
         return;
       }
       const response = await axios.post(
-        "http://127.0.0.1:5001/login",
+        "https://securenet-backend.onrender.com/login",
         {
           username,
           password,

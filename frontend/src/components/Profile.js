@@ -37,14 +37,13 @@ const Profile = () => {
     }));
   };
 
-
   const updateProfile = async () => {
     try {
       console.log("Updating profile details:", editedValuesTemp);
 
       // Make a PUT request to update user details
       const response = await axios.put(
-        "http://127.0.0.1:5001/api/user",
+        "https://securenet-backend.onrender.com/api/user",
         editedValuesTemp,
         {
           headers: {
@@ -71,11 +70,14 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5001/api/user", {
-          headers: {
-            Authorization: localStorage.getItem("token"), // Include the token in the request headers
-          },
-        });
+        const response = await axios.get(
+          "https://securenet-backend.onrender.com/api/user",
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"), // Include the token in the request headers
+            },
+          }
+        );
         console.log(response);
         const data = response.data;
         setUserData(data);
@@ -84,11 +86,9 @@ const Profile = () => {
         console.error("Error fetching user data:", error);
       }
     };
-  
+
     fetchUserData();
   }, []);
-  
-  
 
   return (
     <div className="profile-body">
