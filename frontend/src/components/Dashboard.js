@@ -1,5 +1,6 @@
 // Dashboard.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+
 import "./Dashboard.css";
 import JobDetailsCard from "./JobDetailsCard.js";
 
@@ -11,15 +12,19 @@ const Dashboard = () => {
   const jobListingRef = useRef(null);
 
   // Dummy data for jobs (replace this with your actual job data)
-  const dummyJobs = Array.from({ length: 50 }, (_, index) => ({
-    id: index + 1,
-    title: `Job ${index + 1}`,
-    company: `Company ${index + 1}`,
-    location: `Location ${index + 1}`,
-    description: `Description for Job ${
-      index + 1
-    }. This is a sample job description.`,
-  }));
+  const dummyJobs = useMemo(
+    () =>
+      Array.from({ length: 50 }, (_, index) => ({
+        id: index + 1,
+        title: `Job ${index + 1}`,
+        company: `Company ${index + 1}`,
+        location: `Location ${index + 1}`,
+        description: `Description for Job ${
+          index + 1
+        }. This is a sample job description.`,
+      })),
+    []
+  );
 
   // Calculate the index range for jobs on the current page
   const indexOfLastJob = currentPage * jobsPerPage;
