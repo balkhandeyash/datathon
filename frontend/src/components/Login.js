@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import Register from "./Register";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import axios from "axios"; // Import axios here

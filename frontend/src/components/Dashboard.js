@@ -29,7 +29,7 @@ const Dashboard = () => {
   useEffect(() => {
     // In a real-world scenario, fetch jobs from an API or a database
     setJobs(dummyJobs);
-  }, []);
+  }, [dummyJobs]);
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
