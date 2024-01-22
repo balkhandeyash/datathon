@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 5001;
 const MONGODB_URI =
   "mongodb+srv://root:root@cluster0.mdcnw2v.mongodb.net/UserData?retryWrites=true&w=majority"; // Replace with your MongoDB Atlas connection string
 
+mongoose.set("strictQuery", false);
+
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
