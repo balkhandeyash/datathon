@@ -1,10 +1,11 @@
 // LandingPage.js
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import "react-circular-progressbar/dist/styles.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import axios from "axios";
 
 function LandingPage() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,45 @@ function LandingPage() {
 
   const [loading, setLoading] = useState(false);
   const [alertMessage] = useState(null);
+
+  useEffect(() => {
+    //fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setLoading(true);
+
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: 'https://jsearch.p.rapidapi.com/search',
+        params: {
+          query: 'Python developer in Texas, USA',
+          page: '1',
+          num_pages: '1'
+        },
+        headers: {
+          'X-RapidAPI-Key': 'd5426ca53amshe5ccee5cb130524p125d11jsn9a55bc5d61af',
+          'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+        }
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
+        //setJobDetails(data); // Set job details to state
+      } else {
+        console.error("Error fetching job data");
+        //setAlertMessage("Error fetching job data");
+      }
+    } catch (error) {
+      console.error("Error fetching job data:", error);
+      //setAlertMessage("Error fetching job data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const handleChange = (e) => {
     setFormData({

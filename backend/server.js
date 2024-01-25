@@ -35,6 +35,16 @@ const User = mongoose.model("User", {
   otpTimestamp: Number,
 });
 
+const Job = mongoose.model("Job", {
+  job_id: String,
+  title: String,
+  description: String,
+  location: String,
+  companyName: String,
+  link: String,
+  // Add other fields as needed based on your API response
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -326,6 +336,88 @@ app.put("/api/user", verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error updating user profile" });
   }
 });
+
+app.get("/jobs", async (req, res) => {
+  try {
+    const options = {
+      method: "GET",
+      url: "https://jsearch.p.rapidapi.com/search",
+      params: {
+        query: "Python developer in Texas, USA",
+        page: "2",
+        num_pages: "2",
+      },
+      headers: {
+        "X-RapidAPI-Key": "d5426ca53amshe5ccee5cb130524p125d11jsn9a55bc5d61af",
+        "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+      },
+    };
+
+    const response = await axios.request(options);
+
+    console.log("API Response:", response.data);
+
+    if (response.status === 200) {
+      const jobsData = response.data.data;
+
+      if (Array.isArray(jobsData)) {
+        for (const job of jobsData) {
+          // Check if a job with the same job_id already exists in the database
+          const existingJob = await Job.findOne({ job_id: job.job_id });
+
+          if (!existingJob) {
+            const jobToSave = {
+              job_id: job.job_id || "N/A",
+              title: job.job_title || "N/A",
+              description: job.job_description || "N/A",
+              location: `${job.job_city || "N/A"}, ${job.job_state || "N/A"}, ${job.job_country || "N/A"}`,
+              companyName: job.employer_name || "N/A",
+              link: job.job_apply_link || "N/A",
+              // Add other fields as needed
+            };
+
+            // Save the job to MongoDB
+            await Job.create(jobToSave);
+          }
+        }
+
+        res.status(200).json({ message: "Jobs data fetched and stored successfully" });
+      } else {
+        // Check if a single job with the same job_id already exists in the database
+        const existingJob = await Job.findOne({ job_id: jobsData.job_id });
+
+        if (!existingJob) {
+          const singleJob = {
+            job_id: jobsData.job_id || "N/A",
+            title: jobsData.job_title || "N/A",
+            description: jobsData.job_description || "N/A",
+            location: `${jobsData.job_city || "N/A"}, ${jobsData.job_state || "N/A"}, ${jobsData.job_country || "N/A"}`,
+            companyName: jobsData.employer_name || "N/A",
+            link: jobsData.job_apply_link || "N/A",
+            // Add other fields as needed
+          };
+
+          // Save the single job to MongoDB
+          await Job.create(singleJob);
+        }
+
+        res.status(200).json({ message: "Job data fetched and stored successfully" });
+      }
+    } else {
+      console.error("Error fetching job data");
+      res.status(500).json({ error: "Error fetching job data" });
+    }
+  } catch (error) {
+    console.error("Error fetching or storing job data:", error);
+
+    if (error.name === "MongoError") {
+      console.error("MongoDB Error:", error.message);
+    }
+
+    res.status(500).json({ error: "Error fetching or storing job data" });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
