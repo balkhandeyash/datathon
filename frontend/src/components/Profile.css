@@ -81,7 +81,8 @@
 }
 
 .zoomed-card form button {
-    width: 100%;
+    width: 47%;
+    margin: 5px;
     padding: 12px; /* Adjusted padding */
     background-color: #4caf50; /* Green color for update button */
     color: #fff;
@@ -93,3 +94,39 @@
 .zoomed-card form button.close {
     background-color: #f44336; /* Red color for close button */
 }
+
+@media screen and (max-width: 768px) {
+    .profile-card {
+      width: 90%; /* Adjust the width for smaller screens */
+      padding: 15px; /* Adjusted padding */
+    }
+  
+    .user-details button {
+      margin: 3px; /* Adjusted margin */
+      padding: 6px; /* Adjusted padding */
+      font-size: 0.8rem; /* Adjusted font size */
+    }
+  
+    .zoomed-card form {
+      max-width: 90%; /* Adjust the max-width for smaller screens */
+      padding: 10px; /* Adjusted padding */
+    }
+  
+    .zoomed-card form input {
+      margin-bottom: 6px; /* Adjusted margin */
+      padding: 6px; /* Adjusted padding */
+    }
+  
+    .zoomed-card form button {
+      width: 48%; /* Adjusted width */
+      margin-right: 2%; /* Adjusted margin-right */
+      padding: 8px; /* Adjusted padding */
+      font-size: 0.8rem; /* Adjusted font size */
+    }
+  
+    .zoomed-card form button.close {
+      width: 48%; /* Adjusted width */
+      padding: 8px; /* Adjusted padding */
+      font-size: 0.8rem; /* Adjusted font size */
+    }
+  }

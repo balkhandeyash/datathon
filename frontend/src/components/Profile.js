@@ -51,13 +51,22 @@ const Profile = () => {
           },
         }
       );
+      // Fetch the updated user data again from the server
+    const updatedResponse = await axios.get(
+      "https://securenet-backend.onrender.com/api/user",
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    );
 
-      console.log("Profile updated successfully:", response.data);
+    console.log("Updated User Data:", updatedResponse.data);
 
-      // Update the local state with the new data
-      setEditedValues(editedValuesTemp);
-      setUserData(editedValuesTemp);
-      setIsProfileZoomed(false);
+    // Update the local state with the new data
+    setEditedValues(updatedResponse.data);
+    setUserData(updatedResponse.data);
+    setIsProfileZoomed(false);
     } catch (error) {
       console.error("Error updating user profile:", error);
     }

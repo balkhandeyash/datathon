@@ -93,3 +93,43 @@ button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+@media screen and (max-width: 768px) {
+  .job-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card {
+    width: 330px;
+    height: 230px;
+    padding: 6px; /* Decrease padding for smaller screens */
+    border-radius: 12px; /* Decrease border-radius for smaller screens */
+  }
+  .job-details-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    width:300px;
+    height:300px;
+  }
+  .close-button {
+    position: absolute; /* Position the close button relative to its closest positioned ancestor */
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%); /* Center the button horizontally */
+  margin-top: 10px;
+  padding: 8px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  }
+}
+
