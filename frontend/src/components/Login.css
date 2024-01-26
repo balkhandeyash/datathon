@@ -1,5 +1,5 @@
 .login-body {
-    padding: 30px;
+    padding: 20px;
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
@@ -71,5 +71,23 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .login-container {
+        max-width: 85%;
+        padding: 15px;
+    }
+
+    .form-group input {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .login-button {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin-top: 10px;
     }
 }

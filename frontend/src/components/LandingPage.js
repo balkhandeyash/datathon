@@ -19,6 +19,7 @@ function LandingPage() {
 
   useEffect(() => {
     //fetchData();
+    fetchJobs();
   }, []);
 
   const fetchData = async () => {
@@ -26,17 +27,18 @@ function LandingPage() {
 
     try {
       const response = await axios.request({
-        method: 'GET',
-        url: 'https://jsearch.p.rapidapi.com/search',
+        method: "GET",
+        url: "https://jsearch.p.rapidapi.com/search",
         params: {
-          query: 'Python developer in Texas, USA',
-          page: '1',
-          num_pages: '1'
+          query: "Python developer in Texas, USA",
+          page: "1",
+          num_pages: "1",
         },
         headers: {
-          'X-RapidAPI-Key': 'd5426ca53amshe5ccee5cb130524p125d11jsn9a55bc5d61af',
-          'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
-        }
+          "X-RapidAPI-Key":
+            "d5426ca53amshe5ccee5cb130524p125d11jsn9a55bc5d61af",
+          "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+        },
       });
 
       if (response.status === 200) {
@@ -55,6 +57,12 @@ function LandingPage() {
     }
   };
 
+  const fetchJobs = async () => {
+    try {
+      const response = await axios.get("http://localhost:5001/applyJobs");
+      //console.log(response.data);
+    } catch (error) {}
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -68,13 +76,16 @@ function LandingPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://securenet-backend.onrender.com/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://securenet-backend.onrender.com/api/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         // Handle success, show a success message or redirect

@@ -145,12 +145,14 @@ app.get("/", async (req, res) => {
   console.log(existingUser);
 });
 
-app.get("/login", async (req, res) => {
-  res.send("This is the login page"); // You can send an HTML file or render a login page here
+/*app.get("/login", async (req, res) => {
+  //res.send("This is the login page"); // You can send an HTML file or render a login page here
 
-  const existingUser = await User.find({}, {});
-  console.log(existingUser);
-});
+  const existingUser = await Job.find({}, {});
+  //console.log(existingUser);
+  res.send(existingUser);
+});*/
+
 
 app.post("/register", async (req, res) => {
   try {
@@ -370,7 +372,9 @@ app.get("/jobs", async (req, res) => {
               job_id: job.job_id || "N/A",
               title: job.job_title || "N/A",
               description: job.job_description || "N/A",
-              location: `${job.job_city || "N/A"}, ${job.job_state || "N/A"}, ${job.job_country || "N/A"}`,
+              location: `${job.job_city || "N/A"}, ${job.job_state || "N/A"}, ${
+                job.job_country || "N/A"
+              }`,
               companyName: job.employer_name || "N/A",
               link: job.job_apply_link || "N/A",
               // Add other fields as needed
@@ -381,7 +385,9 @@ app.get("/jobs", async (req, res) => {
           }
         }
 
-        res.status(200).json({ message: "Jobs data fetched and stored successfully" });
+        res
+          .status(200)
+          .json({ message: "Jobs data fetched and stored successfully" });
       } else {
         // Check if a single job with the same job_id already exists in the database
         const existingJob = await Job.findOne({ job_id: jobsData.job_id });
@@ -391,7 +397,9 @@ app.get("/jobs", async (req, res) => {
             job_id: jobsData.job_id || "N/A",
             title: jobsData.job_title || "N/A",
             description: jobsData.job_description || "N/A",
-            location: `${jobsData.job_city || "N/A"}, ${jobsData.job_state || "N/A"}, ${jobsData.job_country || "N/A"}`,
+            location: `${jobsData.job_city || "N/A"}, ${
+              jobsData.job_state || "N/A"
+            }, ${jobsData.job_country || "N/A"}`,
             companyName: jobsData.employer_name || "N/A",
             link: jobsData.job_apply_link || "N/A",
             // Add other fields as needed
@@ -401,7 +409,9 @@ app.get("/jobs", async (req, res) => {
           await Job.create(singleJob);
         }
 
-        res.status(200).json({ message: "Job data fetched and stored successfully" });
+        res
+          .status(200)
+          .json({ message: "Job data fetched and stored successfully" });
       }
     } else {
       console.error("Error fetching job data");
@@ -418,6 +428,13 @@ app.get("/jobs", async (req, res) => {
   }
 });
 
+app.get("/applyJobs", async (req, res) => {
+  //res.send("This is the login page"); // You can send an HTML file or render a login page here
+
+  const existingUser = await Job.find({}, {});
+  //console.log(existingUser);
+  res.send(existingUser);
+});
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

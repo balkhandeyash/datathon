@@ -78,11 +78,13 @@ body, html {
   }
   
   .developer img {
-    width: 120px; /* Reduced image size */
-    height: 120px; /* Reduced image size */
+    width: 200px; /* Reduced image size */
+    height: 200px; /* Reduced image size */
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #fff;
+    margin: 0 auto; /* Center the image horizontally */
+  display: block; 
+    border: 5px solid blanchedalmond;
   }
   
   .developer p {

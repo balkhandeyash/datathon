@@ -40,7 +40,7 @@
 
 .password-toggle-icon {
   cursor: pointer;
-  margin-left: -25px; /* Adjust the spacing between the icon and input */
+  margin-left: -30px; /* Adjust the spacing between the icon and input */
 }
 
 .form-header h2 {
@@ -63,6 +63,7 @@
   font-size: 14px; /* Reduced font size */
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin:5px;
 }
 
 .button {
@@ -120,5 +121,35 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .form-container {
+      max-width: 90%;
+      padding: 15px;
+  }
+
+  .form-group input {
+      padding: 6px;
+      margin: 5px;
+      font-size: 12px;
+  }
+
+  .button {
+      padding: 8px 12px;
+      font-size: 14px;
+      margin-top: 10px;
+  }
+
+  .circular-progress-container {
+      max-width: 85%;
+      padding: 15px;
+  }
+
+  .progress-bar-container {
+      width: 80px; /* Adjust the width as needed */
+      height: 80px; /* Adjust the height as needed */
   }
 }

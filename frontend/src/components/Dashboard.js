@@ -1,6 +1,6 @@
 // Dashboard.js
 import React, { useState, useEffect, useRef, useMemo } from "react";
-
+import axios from "axios";
 import "./Dashboard.css";
 import JobDetailsCard from "./JobDetailsCard.js";
 
@@ -22,6 +22,7 @@ const Dashboard = () => {
         description: `Description for Job ${
           index + 1
         }. This is a sample job description.`,
+        link: `https://example.com/job${index + 1}`,
       })),
     []
   );
@@ -33,8 +34,16 @@ const Dashboard = () => {
 
   useEffect(() => {
     // In a real-world scenario, fetch jobs from an API or a database
+    fetchJobs();
     setJobs(dummyJobs);
   }, [dummyJobs]);
+
+  const fetchJobs = async () => {
+    try {
+      const response = await axios.get("http://localhost:5001/applyJobs");
+      //console.log(response.data);
+    } catch (error) {}
+  };
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -83,9 +92,10 @@ const Dashboard = () => {
               onClick={() => handleJobClick(job.id)}
             >
               <h3>{job.title}</h3>
-              <p>{job.company}</p>
+              <p>{job.companyName}</p>
               <p>{job.location}</p>
               <p className="job-description">{job.description}</p>
+              <p>{job.link}</p>
             </div>
           ))}
         </div>
