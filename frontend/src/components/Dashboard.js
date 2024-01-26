@@ -18,10 +18,12 @@ const Dashboard = () => {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/applyJobs");
+      const response = await axios.get(
+        "https://securenet-backend.onrender.com/applyJobs"
+      );
       setJobs(response.data);
     } catch (error) {
-      console.error("Error fetching jobs:", error);
+      console.error("Error fetching jobs:123   ", error);
     }
   };
 
@@ -68,14 +70,18 @@ const Dashboard = () => {
           {jobs.map((job) => (
             <div
               key={job._id} // Assuming _id is a unique identifier for each job
-              className={`job-card ${selectedJob === job._id ? "selected" : ""}`}
+              className={`job-card ${
+                selectedJob === job._id ? "selected" : ""
+              }`}
               onClick={() => handleJobClick(job._id)}
             >
               <h3>{job.title}</h3>
               <p>{job.companyName}</p>
               <p>{job.location}</p>
               <p className="job-description">{job.description}</p>
-              <p><span className="link">{job.link}</span></p>
+              <p>
+                <span className="link">{job.link}</span>
+              </p>
             </div>
           ))}
         </div>

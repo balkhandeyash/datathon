@@ -89,7 +89,7 @@
 }
 
 .close-button {
-  position: relative;
+  position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -142,8 +142,8 @@ button:disabled {
   }
 
   .job-card {
-    width: 330px;
-    height: 230px;
+    width: 100%;
+    height: auto;
     padding: 15px;
     /* Adjust padding for smaller screens */
     border-radius: 12px;
