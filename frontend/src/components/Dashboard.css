@@ -142,8 +142,8 @@ button:disabled {
   }
 
   .job-card {
-    width: 100%;
-    height: auto;
+    width: 80vw;
+    height: 40wh;
     padding: 15px;
     /* Adjust padding for smaller screens */
     border-radius: 12px;
