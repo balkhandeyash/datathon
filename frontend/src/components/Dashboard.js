@@ -11,38 +11,18 @@ const Dashboard = () => {
   const jobsPerPage = 15;
   const jobListingRef = useRef(null);
 
-  // Dummy data for jobs (replace this with your actual job data)
-  const dummyJobs = useMemo(
-    () =>
-      Array.from({ length: 50 }, (_, index) => ({
-        id: index + 1,
-        title: `Job ${index + 1}`,
-        company: `Company ${index + 1}`,
-        location: `Location ${index + 1}`,
-        description: `Description for Job ${
-          index + 1
-        }. This is a sample job description.`,
-        link: `https://example.com/job${index + 1}`,
-      })),
-    []
-  );
-
-  // Calculate the index range for jobs on the current page
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
-
   useEffect(() => {
-    // In a real-world scenario, fetch jobs from an API or a database
+    // Fetch jobs from the server when the component mounts
     fetchJobs();
-    setJobs(dummyJobs);
-  }, [dummyJobs]);
+  }, []);
 
   const fetchJobs = async () => {
     try {
       const response = await axios.get("http://localhost:5001/applyJobs");
-      //console.log(response.data);
-    } catch (error) {}
+      setJobs(response.data);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
   };
 
   const handleNextPage = () => {
@@ -85,17 +65,17 @@ const Dashboard = () => {
         className={`job-listing-container ${selectedJob ? "zoomed" : ""}`}
       >
         <div className="job-grid">
-          {currentJobs.map((job) => (
+          {jobs.map((job) => (
             <div
-              key={job.id}
-              className={`job-card ${selectedJob === job.id ? "selected" : ""}`}
-              onClick={() => handleJobClick(job.id)}
+              key={job._id} // Assuming _id is a unique identifier for each job
+              className={`job-card ${selectedJob === job._id ? "selected" : ""}`}
+              onClick={() => handleJobClick(job._id)}
             >
               <h3>{job.title}</h3>
               <p>{job.companyName}</p>
               <p>{job.location}</p>
               <p className="job-description">{job.description}</p>
-              <p>{job.link}</p>
+              <p><span className="link">{job.link}</span></p>
             </div>
           ))}
         </div>
@@ -106,7 +86,7 @@ const Dashboard = () => {
           <span>{`Page ${currentPage}`}</span>
           <button
             onClick={handleNextPage}
-            disabled={indexOfLastJob >= jobs.length}
+            disabled={currentPage * jobsPerPage >= jobs.length}
           >
             Next
           </button>
@@ -115,7 +95,7 @@ const Dashboard = () => {
 
       {selectedJob && (
         <JobDetailsCard
-          job={jobs.find((job) => job.id === selectedJob)}
+          job={jobs.find((job) => job._id === selectedJob)}
           onClose={() => setSelectedJob(null)}
         />
       )}
